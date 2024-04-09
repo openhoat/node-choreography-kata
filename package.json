@@ -10,6 +10,10 @@
     "test": "jest"
   },
   "license": "ISC",
+  "dependencies": {
+    "pino": "^8.20.0",
+    "pino-pretty": "^11.0.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
     "@types/jest": "^29.5.12",
