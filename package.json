@@ -1,0 +1,41 @@
+{
+  "dependencies": {
+    "pino": "9.6.0",
+    "pino-pretty": "13.0.0"
+  },
+  "description": "NodeJS Choreography Kata",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@jest/globals": "29.7.0",
+    "@types/node": "22.13.10",
+    "jest": "29.7.0",
+    "rimraf": "6.0.1",
+    "ts-jest": "29.3.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.8.2"
+  },
+  "engines": {
+    "node": "22.14.0",
+    "pnpm": "10.6.4"
+  },
+  "license": "ISC",
+  "main": "lib/main",
+  "name": "node-choreography-kata",
+  "packageManager": "pnpm@10.6.4",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "check": "biome check .",
+    "check:fix": "biome check --fix .",
+    "clean": "rimraf dist lib",
+    "format": "biome format .",
+    "format:fix": "biome format --fix .",
+    "test": "jest"
+  },
+  "type": "module",
+  "version": "0.0.1",
+  "volta": {
+    "node": "22.14.0",
+    "pnpm": "10.6.4"
+  }
+}
