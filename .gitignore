@@ -1,0 +1,14 @@
+/.idea/
+/.npm/
+/.vscode/
+/dist/
+/lib/
+/node_modules/
+/tmp/
+
+/.DS_Store
+/.envrc
+/.env.local
+
+*.log
+tsconfig.tsbuildinfo
