@@ -1,25 +1,28 @@
-import { InventoryService } from './inventory-service'
-import { TicketingService } from './ticketing-service'
+import { EventBus, Event } from '../shared/event-bus'
+import { Logger } from 'pino'
 
 export class BookingService {
-  #inventoryService: InventoryService
-  #ticketingService: TicketingService
+  #logger: Logger
+  #eventBus: EventBus
 
-  constructor(
-    inventoryService: InventoryService,
-    ticketingService: TicketingService,
-  ) {
-    this.#inventoryService = inventoryService
-    this.#ticketingService = ticketingService
+  constructor(logger: Logger, eventBus: EventBus) {
+    this.#logger = logger
+    this.#eventBus = eventBus
   }
 
-  requestBooking(numberOfSeats: number): boolean {
-    console.log(`booking requested with ${numberOfSeats} seats!`)
-    const seatsReserved = this.#inventoryService.reserveInventory(numberOfSeats)
-    if (!seatsReserved) {
-      return false
-    }
-    this.#ticketingService.printTicket(numberOfSeats)
-    return true
+  async requestBooking(numberOfSeats: number): Promise<void> {
+    this.#logger.info(`booking requested with ${numberOfSeats} seats!`)
+    await this.#eventBus.sendAndWait(
+      Event.RESERVE_INVENTORY,
+      Event.INVENTORY_RESERVED,
+      Event.RESERVE_INVENTORY_ERROR,
+      numberOfSeats,
+    )
+    await this.#eventBus.sendAndWait(
+      Event.PRINT_TICKET,
+      Event.TICKET_PRINTED,
+      Event.PRINT_TICKET_ERROR,
+      numberOfSeats,
+    )
   }
 }
